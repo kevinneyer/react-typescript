@@ -1,35 +1,46 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '../public/vite.svg';
-import './App.css'
+import { useState, useEffect } from 'react';
+import './App.css';
+import ListItem from './components/listItem'
 
 function App() {
-  const [count, setCount] = useState(0)
+    const [inputValue, setInputValue] = useState<string>("");
+    const [todoList, setTodoList] = useState<Array>([]);
+    
+    const inputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setInputValue(event.target.value);
+    };
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        setInputValue("");
+        setTodoList([...todoList, inputValue]);
+    }
+
+    const toDos = todoList.map((todo: string) => <li>{todo}</li>);
+    
+    return (
+        <>
+            <div className="container">
+                <h1 className="header">ToDo List</h1>
+                <form onSubmit={submitHandler}>
+                    <input
+                        type="text"
+                        className="input"
+                        placeholder='Enter To Do...'
+                        value={inputValue} 
+                        onChange={inputHandler}
+                    />
+                    <input 
+                        type="submit"
+                        disabled={inputValue.length > 0 ? false : true}
+                    />
+                </form>
+                <div className="todo-container">
+                    {toDos}
+                </div>
+            </div>
+        </>
+    );
 }
 
 export default App
