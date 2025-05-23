@@ -8,10 +8,19 @@
     width: inherit;
 }
 
-.delete {
+.active-box {
+    border-radius: 10px;
+    border-width: 2px;
+    border-color: green;
+    border-style: solid;
+    color: green;
+    display: flex;
+    padding: 20px;
+    width: inherit;
+}
+
+.button-container {
     margin-left: auto;
-    width: 14px;
-    height: 14px;
-    font-size: 14px;
-    font-weight: 700;
+    display: flex;
+    gap: 5px;
 }

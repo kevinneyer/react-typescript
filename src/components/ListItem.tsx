@@ -1,18 +1,33 @@
 import '../ListItem.css';
 
-interface ListItemProps {
-    title: string;
-    removeHandler: (todoString: string) => void;
+interface ToDoInterface {
+    id: number;
+    text: string;
+    isComplete: boolean;
 }
-export default function ListItem({ title, removeHandler}: ListItemProps) {
+
+interface ListItemProps {
+    todo: ToDoInterface;
+    removeHandler: (arg: ToDoInterface) => void;
+    completeHandler: (arg: ToDoInterface) => void;
+}
+
+export default function ListItem({ todo, removeHandler, completeHandler}: ListItemProps) {
     const triggerDelete  = () => {
-        removeHandler(title);
+        removeHandler(todo);
+    };
+
+    const triggerComplete = () => {
+        completeHandler(todo);
     };
 
     return (
-        <div className="box">
-            <div>{title}</div>
-            <div className="delete" onClick={triggerDelete}>X</div>
+        <div className={todo.isComplete ? 'active-box' : 'box'}>
+            <div>{todo.text}</div>
+            <div className="button-container">
+                <button onClick={triggerComplete}>Complete</button>
+                <button onClick={triggerDelete}>Remove</button>
+            </div>
         </div>
     );
 };
