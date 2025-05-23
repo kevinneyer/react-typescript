@@ -1,0 +1,17 @@
+.box {
+    border-radius: 10px;
+    border-width: 2px;
+    border-color: white;
+    border-style: solid;
+    display: flex;
+    padding: 20px;
+    width: inherit;
+}
+
+.delete {
+    margin-left: auto;
+    width: 14px;
+    height: 14px;
+    font-size: 14px;
+    font-weight: 700;
+}

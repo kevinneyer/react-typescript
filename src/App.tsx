@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import './App.css';
-import ListItem from './components/listItem'
+import ListItem from './components/ListItem'
 
 function App() {
     const [inputValue, setInputValue] = useState<string>("");
-    const [todoList, setTodoList] = useState<Array>([]);
+    const [todoList, setTodoList] = useState<string[]>([]);
     
     const inputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(event.target.value);
@@ -14,9 +14,13 @@ function App() {
         event.preventDefault();
         setInputValue("");
         setTodoList([...todoList, inputValue]);
-    }
+    };
 
-    const toDos = todoList.map((todo: string) => <li>{todo}</li>);
+    const removeHandler = (todoString: string): void => {
+        setTodoList([...todoList].filter(todo => todo !== todoString));
+    };
+
+    const toDos = todoList.map((todo: string) => <ListItem title={todo} removeHandler={removeHandler}/>);
     
     return (
         <>
