@@ -1,10 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import './App.css';
-import ListItem from './components/listItem'
+import ListItem from './components/ListItem'
+interface ToDoInterface {
+    id: number;
+    text: string;
+    isComplete: boolean;
+}
 
 function App() {
     const [inputValue, setInputValue] = useState<string>("");
-    const [todoList, setTodoList] = useState<Array>([]);
+    const [todoList, setTodoList] = useState<Array<ToDoInterface>>([]);
     
     const inputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(event.target.value);
@@ -13,10 +18,25 @@ function App() {
     const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         setInputValue("");
-        setTodoList([...todoList, inputValue]);
-    }
+        let value: ToDoInterface = {
+            id: todoList.length + 1,
+            text: inputValue,
+            isComplete: false,
+        }
+        setTodoList([...todoList, value]);
+    };
 
-    const toDos = todoList.map((todo: string) => <li>{todo}</li>);
+    const removeHandler = (arg: ToDoInterface): void => {
+        setTodoList([...todoList].filter(todo => todo.id !== arg.id));
+    };
+
+    const completeHandler = (arg: ToDoInterface): void => {
+        let completedItem = todoList.filter(todo => todo.id == arg.id)[0]
+        completedItem.isComplete = true;
+        setTodoList([...todoList].splice(arg.id-1, 1, completedItem));
+    };
+
+    // const toDos = todoList.map((todo: string) => <ListItem title={todo} removeHandler={removeHandler}/>);
     
     return (
         <>
@@ -36,7 +56,9 @@ function App() {
                     />
                 </form>
                 <div className="todo-container">
-                    {toDos}
+                    {todoList.map((todo: ToDoInterface) => {
+                        return <ListItem todo={todo} completeHandler={completeHandler} removeHandler={removeHandler}/>;
+                    })}
                 </div>
             </div>
         </>
