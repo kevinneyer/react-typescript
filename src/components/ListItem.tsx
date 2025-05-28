@@ -21,11 +21,15 @@ export default function ListItem({ todo, removeHandler, completeHandler}: ListIt
         completeHandler(todo);
     };
 
+    const isComplete = () => {
+        return todo.isComplete;
+    }
+
     return (
         <div className={todo.isComplete ? 'active-box' : 'box'}>
             <div>{todo.text}</div>
             <div className="button-container">
-                <button onClick={triggerComplete}>Complete</button>
+                <button disabled={isComplete()} onClick={triggerComplete}>Complete</button>
                 <button onClick={triggerDelete}>Remove</button>
             </div>
         </div>

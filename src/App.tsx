@@ -22,7 +22,7 @@ function App() {
             id: todoList.length + 1,
             text: inputValue,
             isComplete: false,
-        }
+        };
         setTodoList([...todoList, value]);
     };
 
@@ -50,7 +50,8 @@ function App() {
                         value={inputValue} 
                         onChange={inputHandler}
                     />
-                    <input 
+                    <input
+                        className="button"
                         type="submit"
                         disabled={inputValue.length > 0 ? false : true}
                     />
