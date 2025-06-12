@@ -10,6 +10,7 @@ interface ToDoInterface {
 function App() {
     const [inputValue, setInputValue] = useState<string>("");
     const [todoList, setTodoList] = useState<Array<ToDoInterface>>([]);
+    const [incrementalId, setIncrementalId] = useState<number>(1);
     
     const inputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(event.target.value);
@@ -18,8 +19,9 @@ function App() {
     const submitHandler = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         setInputValue("");
+        setIncrementalId(incrementalId + 1);
         let value: ToDoInterface = {
-            id: todoList.length + 1,
+            id: incrementalId,
             text: inputValue,
             isComplete: false,
         };
@@ -35,8 +37,6 @@ function App() {
         completedItem.isComplete = true;
         setTodoList([...todoList]);
     };
-
-    // const toDos = todoList.map((todo: string) => <ListItem title={todo} removeHandler={removeHandler}/>);
     
     return (
         <>
