@@ -33,7 +33,7 @@ function App() {
     const completeHandler = (arg: ToDoInterface): void => {
         let completedItem = todoList.filter(todo => todo.id == arg.id)[0]
         completedItem.isComplete = true;
-        setTodoList([...todoList].splice(arg.id-1, 1, completedItem));
+        setTodoList([...todoList]);
     };
 
     // const toDos = todoList.map((todo: string) => <ListItem title={todo} removeHandler={removeHandler}/>);
@@ -50,16 +50,18 @@ function App() {
                         value={inputValue} 
                         onChange={inputHandler}
                     />
-                    <input
+                    <input 
                         className="button"
                         type="submit"
                         disabled={inputValue.length > 0 ? false : true}
                     />
                 </form>
                 <div className="todo-container">
-                    {todoList.map((todo: ToDoInterface) => {
-                        return <ListItem todo={todo} completeHandler={completeHandler} removeHandler={removeHandler}/>;
-                    })}
+                    {
+                        todoList.map((todo: ToDoInterface) => {
+                            return <ListItem todo={todo} completeHandler={completeHandler} removeHandler={removeHandler}/>;
+                        })
+                    }
                 </div>
             </div>
         </>

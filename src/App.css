@@ -1,7 +1,7 @@
 #root {
-  max-width: 1280px;
-  margin-right: auto;
-  margin-left: auto;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1280px;
 }
 
 .container {
@@ -15,37 +15,37 @@
 
 input {
     display: block;
-    width: 75%;
     margin-left: auto;
     margin-right: auto;
     margin-top: 30px;
+    width: 75%;
 }
 
 .button {
-    cursor: pointer;
-    height: 50px;
-    width: 25%;
+    background-color: black;
+    border: transparent;
     border-radius: 10px;
-    background-color: gray;
-    color: black;
-    font-size: 16px;
+    color: white;
+    cursor: pointer;
+    height: 40px;
+    transition: all ease-in-out 200ms;
+    width: 25%;
 }
 
-.button:hover{
+.button:hover {
     background-color: white;
-    transition: all 300ms ease-in-out;
+    color: black;
 }
+
 
 .todo-container {
+    align-items: center;
     display: flex;
     flex-direction: column;
     gap: 25px;
-    padding-top: 25px;
-    max-width: 75%;
-    width: 75%;
-    align-items: center;
     margin-left: auto;
     margin-right: auto;
-    /* color: white;
-    height: 600px; */
+    max-width: 75%;
+    padding-top: 25px;
+    width: 75%;
 }
