@@ -59,7 +59,7 @@ function App() {
                     />
                 </form>
                 <div className="todo-container">
-                    <div className="to-complete">
+                    <div className="todo-column">
                         <h3>To Complete</h3>
                         {
                             todoList.map((todo: ToDoInterface) => {
